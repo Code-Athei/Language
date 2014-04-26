@@ -28,13 +28,14 @@ int abs(int self):
 ```
 함수명을 연산자로 한다면 연산자 오버라이딩을 구현할 수 있다.
 ```
-T list +(T list self, T list other) gen T:
-	ret T list.join(self, other)
+T? list +(T? list self, T? list other):
+	#ret T? list.join(self, other)
+	ret self.join(other)
 ```
 
 ###타입 선언###
 ```
-type 타입명 [ext 타입목록] [gen 타입목록]:
+type 타입명 [from 타입목록]:
 	타입몸체
 ```
 타입의 몸체는 멤버의 선언으로 정의한다. 멤버의 정의는 바깥에 위치하도록 한다.
@@ -42,22 +43,25 @@ type 타입명 [ext 타입목록] [gen 타입목록]:
 type Person:
 	int age
 	char list name
+
+type Hero from Person:
+	int magic_power
 ```
 
 ###타입 축약###
 ```
-type 타입명 [gen 타입목록] = 타입
+type 타입명 = 타입
 ```
 타입 정의에 다른 타입을 대입하여 긴 타입명을 짧게 바꿀 수 있다.
 ```
 type string = char list
-type id_list gen T = int T Pair list
+type T? id_list = int T? Pair list
 ```
 
 ###상속###
 
 ```
-type Programmer ext Person, Nerd:
+type Programmer from Person, Nerd:
 	int coffee
 
 init (Programmer self, int age, char list name):
@@ -65,15 +69,16 @@ init (Programmer self, int age, char list name):
 	init(self as Nerd)
 	self.coffee = int.maximum
 ```
+상속은 from 연산자를 통해 이루어진다.
 
 ###제네릭 타입 선언###
 
 제네릭 타입은 타입을 인자로 받는 타입이다.
-제네릭 타입의 선언은 아래와 같이 한다.
+? 키워드를 통해 제네릭 타입의 선언할 수 있다.
 ```
-type Pair gen FT, ST:
-	FT first
-	ST second
+type FT? ST? Pair:
+	FT? first
+	ST? second
 ```
 
 ###생성자###
@@ -126,7 +131,7 @@ if, elif, else 문은 Python 의 그것과 일치한다.
 
 while 문은 Python 의 그것과 일치한다.
 
-for 의 경우 T enumerable 클래스를 상속받아 구현해야 한다.
+for 의 경우 T? enumerable 클래스를 상속받아 구현해야 한다.
 작동 방식은 Python 의 그것과 일치한다.
 
 ###모듈###
