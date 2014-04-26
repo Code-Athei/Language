@@ -114,12 +114,12 @@ int b(A type):
 stdout < A.b	# 20
 ```
 
-###lambda 와 delegate###
+###lambda 와 함수형 변수###
 
 lambda 키워드를 통해 무명 함수를 만들 수 있다. 컴파일 타임에 확장된다.
-delegate 키워드를 통해 동적으로 함수를 선택하여 호출할 수 있다.
+함수형 변수를 선언해 동적으로 함수를 선택하여 호출할 수 있다.
 ```
-delegate int square(int) = lambda x: x^2
+int square(int) = lambda x: x^2
 stdout < square(3) 	# 9
 ```
 
